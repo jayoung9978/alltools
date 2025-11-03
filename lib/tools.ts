@@ -62,6 +62,12 @@ export const toolCategories: ToolCategory[] = [
         description: "할인율, 할인가 계산",
         href: "/calc/discount",
       },
+      {
+        id: "countdown",
+        name: "카운트다운 타이머",
+        description: "D-day, 이벤트까지 남은 시간",
+        href: "/calc/countdown",
+      },
     ],
   },
   {
@@ -164,6 +170,13 @@ export const toolCategories: ToolCategory[] = [
         name: "대소문자 변환",
         description: "UPPER, lower, Capitalize 변환",
         href: "/text/case",
+      },
+      {
+        id: "duplicate",
+        name: "중복 제거",
+        description: "중복된 줄 제거, 고유값만 추출",
+        href: "/text/duplicate",
+        popular: true,
       },
     ],
   },
