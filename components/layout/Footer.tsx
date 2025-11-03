@@ -24,8 +24,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/calc/date" className="hover:text-primary-500">
-                  날짜 계산기
+                <Link href="/calc/countdown" className="hover:text-primary-500">
+                  카운트다운
                 </Link>
               </li>
             </ul>
@@ -38,27 +38,27 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
               <li>
+                <Link href="/conv/csv-json" className="hover:text-primary-500">
+                  CSV ↔ JSON
+                </Link>
+              </li>
+              <li>
+                <Link href="/conv/image" className="hover:text-primary-500">
+                  이미지 변환
+                </Link>
+              </li>
+              <li>
                 <Link href="/conv/color" className="hover:text-primary-500">
-                  색상 변환기
-                </Link>
-              </li>
-              <li>
-                <Link href="/conv/base64" className="hover:text-primary-500">
-                  Base64 변환
-                </Link>
-              </li>
-              <li>
-                <Link href="/conv/unit" className="hover:text-primary-500">
-                  단위 변환
+                  색상 변환
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* 생성기 */}
+          {/* 생성기 & 텍스트 */}
           <div>
             <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
-              생성기
+              생성기 & 텍스트
             </h3>
             <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
               <li>
@@ -67,13 +67,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/gen/password" className="hover:text-primary-500">
-                  비밀번호
+                <Link href="/gen/random" className="hover:text-primary-500">
+                  랜덤 추첨
                 </Link>
               </li>
               <li>
-                <Link href="/gen/gradient" className="hover:text-primary-500">
-                  그라데이션
+                <Link href="/text/duplicate" className="hover:text-primary-500">
+                  중복 제거
                 </Link>
               </li>
             </ul>
