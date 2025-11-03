@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -80,12 +79,11 @@ export default function RootLayout({
       <head>
         <JsonLd />
         {/* Google AdSense */}
-        <Script
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4943284524590783"
           crossOrigin="anonymous"
-          strategy="beforeInteractive"
-        />
+        ></script>
       </head>
       <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
