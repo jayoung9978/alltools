@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s | ASDW.KR",
   },
   description:
-    "대출 계산기, BMI 계산기, 단위 변환, QR코드 생성, 비밀번호 생성기 등 20개 이상의 무료 웹 도구를 제공합니다. 광고 없이 깔끔하게 이용하세요.",
+    "대출 계산기, BMI 계산기, 단위 변환, QR코드 생성, 비밀번호 생성기 등 20개 이상의 무료 웹 도구를 제공합니다.",
   keywords: [
     "무료 도구",
     "웹 도구",
@@ -80,6 +81,14 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body className={inter.className}>
+        {/* Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4943284524590783"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-grow">{children}</main>
