@@ -108,6 +108,20 @@ export const toolCategories: ToolCategory[] = [
         description: "JSON 정렬 및 압축",
         href: "/conv/json",
       },
+      {
+        id: "csv-json",
+        name: "CSV ↔ JSON",
+        description: "CSV와 JSON 상호 변환",
+        href: "/conv/csv-json",
+        popular: true,
+      },
+      {
+        id: "image",
+        name: "이미지 변환",
+        description: "JPG, PNG, WEBP 포맷 변환",
+        href: "/conv/image",
+        popular: true,
+      },
     ],
   },
   {
