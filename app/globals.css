@@ -7,6 +7,27 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Main content container with space for side ads */
+main {
+  @apply mx-auto;
+  max-width: 1200px; /* Content area width */
+}
+
+/* On larger screens, add padding for ad space */
+@media (min-width: 1440px) {
+  body {
+    padding-left: 160px;  /* Left ad space (160px for standard ad units) */
+    padding-right: 160px; /* Right ad space */
+  }
+}
+
+@media (min-width: 1600px) {
+  body {
+    padding-left: 200px;  /* Wider ad space for larger screens */
+    padding-right: 200px;
+  }
+}
+
 @layer base {
   h1 {
     @apply text-4xl font-bold;
