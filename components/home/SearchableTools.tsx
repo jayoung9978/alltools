@@ -82,7 +82,7 @@ export default function SearchableTools() {
             <section className="py-12 border-t border-gray-200 dark:border-gray-700 mt-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div>
-                  <div className="text-3xl font-bold text-primary-500">25+</div>
+                  <div className="text-3xl font-bold text-primary-500">29+</div>
                   <div className="text-gray-600 dark:text-gray-400">도구</div>
                 </div>
                 <div>

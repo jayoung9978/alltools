@@ -52,6 +52,11 @@ export default function Footer() {
                   색상 변환
                 </Link>
               </li>
+              <li>
+                <Link href="/conv/data-size" className="hover:text-primary-500">
+                  데이터 크기
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -72,8 +77,23 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/gen/favicon" className="hover:text-primary-500">
+                  Favicon 패키지
+                </Link>
+              </li>
+              <li>
+                <Link href="/gen/tournament" className="hover:text-primary-500">
+                  투표 & 선택
+                </Link>
+              </li>
+              <li>
                 <Link href="/text/duplicate" className="hover:text-primary-500">
                   중복 제거
+                </Link>
+              </li>
+              <li>
+                <Link href="/dev/contrast" className="hover:text-primary-500">
+                  색상 대비 검사
                 </Link>
               </li>
             </ul>

@@ -14,18 +14,30 @@ export const metadata: Metadata = {
 		template: "%s | ASDW.KR",
 	},
 	description:
-		"대출 계산기, BMI 계산기, 단위 변환, QR코드 생성, 비밀번호 생성기 등 20개 이상의 무료 웹 도구를 제공합니다.",
+		"대출 계산기, BMI 계산기, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사, 토너먼트 선택 등 29개 이상의 무료 웹 도구를 제공합니다.",
 	keywords: [
 		"무료 도구",
 		"웹 도구",
 		"계산기",
 		"대출 계산기",
 		"BMI 계산기",
+		"카운트다운 타이머",
 		"단위 변환기",
+		"CSV JSON 변환",
+		"이미지 변환",
+		"데이터 크기 변환",
 		"QR코드 생성",
 		"비밀번호 생성기",
+		"Favicon 생성기",
+		"파비콘 패키지",
+		"토너먼트 선택",
+		"투표 도구",
+		"랜덤 추첨",
 		"글자수 세기",
+		"텍스트 중복 제거",
 		"텍스트 비교",
+		"색상 대비 검사",
+		"WCAG 접근성",
 		"Base64 인코딩",
 		"JSON 포맷터",
 		"타임스탬프 변환",
@@ -52,13 +64,13 @@ export const metadata: Metadata = {
 		siteName: "ASDW.KR",
 		title: "ASDW.KR - 무료 웹 도구 모음",
 		description:
-			"대출 계산기, BMI 계산기, 단위 변환, QR코드 생성 등 20개 이상의 무료 웹 도구",
+			"대출 계산기, BMI 계산기, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사 등 29개 이상의 무료 웹 도구",
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: "ASDW.KR - 무료 웹 도구 모음",
 		description:
-			"대출 계산기, BMI 계산기, 단위 변환, QR코드 생성 등 20개 이상의 무료 웹 도구",
+			"대출 계산기, BMI 계산기, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사 등 29개 이상의 무료 웹 도구",
 	},
 	verification: {
 		// 나중에 Google Search Console에서 받은 verification code 추가
