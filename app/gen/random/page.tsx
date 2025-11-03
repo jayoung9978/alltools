@@ -8,6 +8,9 @@ export default function RandomPicker() {
   const [result, setResult] = useState("");
   const [history, setHistory] = useState<string[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [sequenceMode, setSequenceMode] = useState(false);
+  const [sequenceOrder, setSequenceOrder] = useState<string[]>([]);
+  const [remainingItems, setRemainingItems] = useState<string[]>([]);
 
   const getItems = () => {
     return items
@@ -67,6 +70,49 @@ export default function RandomPicker() {
   const reset = () => {
     setResult("");
     setHistory([]);
+    setSequenceMode(false);
+    setSequenceOrder([]);
+    setRemainingItems([]);
+  };
+
+  const startSequence = () => {
+    const itemList = getItems();
+    if (itemList.length === 0) {
+      alert("항목을 입력해주세요.");
+      return;
+    }
+    setSequenceMode(true);
+    setRemainingItems([...itemList]);
+    setSequenceOrder([]);
+    setResult("");
+  };
+
+  const pickNext = () => {
+    if (remainingItems.length === 0) {
+      alert("모든 항목이 선택되었습니다.");
+      return;
+    }
+
+    setIsAnimating(true);
+
+    // 애니메이션 효과
+    let counter = 0;
+    const interval = setInterval(() => {
+      const randomItem = remainingItems[Math.floor(Math.random() * remainingItems.length)];
+      setResult(randomItem);
+      counter++;
+
+      if (counter >= 15) {
+        clearInterval(interval);
+        const randomIndex = Math.floor(Math.random() * remainingItems.length);
+        const selectedItem = remainingItems[randomIndex];
+
+        setResult(selectedItem);
+        setSequenceOrder((prev) => [...prev, selectedItem]);
+        setRemainingItems((prev) => prev.filter((_, i) => i !== randomIndex));
+        setIsAnimating(false);
+      }
+    }, 80);
   };
 
   const loadExample = () => {
@@ -113,38 +159,74 @@ export default function RandomPicker() {
           </div>
 
           <div className="mt-6 space-y-3">
-            <button
-              onClick={pick}
-              disabled={isAnimating}
-              className="btn-primary w-full"
-            >
-              🎲 1개 추첨
-            </button>
+            {!sequenceMode ? (
+              <>
+                <button
+                  onClick={pick}
+                  disabled={isAnimating}
+                  className="btn-primary w-full"
+                >
+                  🎲 1개 추첨
+                </button>
 
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                onClick={() => pickMultiple(3)}
-                className="btn-secondary text-sm py-2"
-              >
-                3개
-              </button>
-              <button
-                onClick={() => pickMultiple(5)}
-                className="btn-secondary text-sm py-2"
-              >
-                5개
-              </button>
-              <button
-                onClick={() => pickMultiple(10)}
-                className="btn-secondary text-sm py-2"
-              >
-                10개
-              </button>
-            </div>
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    onClick={() => pickMultiple(3)}
+                    className="btn-secondary text-sm py-2"
+                  >
+                    3개
+                  </button>
+                  <button
+                    onClick={() => pickMultiple(5)}
+                    className="btn-secondary text-sm py-2"
+                  >
+                    5개
+                  </button>
+                  <button
+                    onClick={() => pickMultiple(10)}
+                    className="btn-secondary text-sm py-2"
+                  >
+                    10개
+                  </button>
+                </div>
 
-            <button onClick={reset} className="btn-secondary w-full">
-              초기화
-            </button>
+                <button
+                  onClick={startSequence}
+                  className="btn-primary w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                >
+                  📋 순서 정하기 시작
+                </button>
+
+                <button onClick={reset} className="btn-secondary w-full">
+                  초기화
+                </button>
+              </>
+            ) : (
+              <>
+                <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 text-center">
+                  <div className="text-sm font-semibold text-purple-600 dark:text-purple-400">
+                    순서 정하기 모드
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                    남은 항목: {remainingItems.length}개
+                  </div>
+                </div>
+
+                <button
+                  onClick={pickNext}
+                  disabled={isAnimating || remainingItems.length === 0}
+                  className="btn-primary w-full"
+                >
+                  {remainingItems.length > 0
+                    ? `🎯 ${sequenceOrder.length + 1}번째 뽑기`
+                    : "✅ 완료"}
+                </button>
+
+                <button onClick={reset} className="btn-secondary w-full">
+                  초기화
+                </button>
+              </>
+            )}
           </div>
         </div>
 
@@ -178,8 +260,30 @@ export default function RandomPicker() {
             )}
           </div>
 
+          {/* Sequence Order */}
+          {sequenceMode && sequenceOrder.length > 0 && (
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+              <h2 className="text-xl font-semibold mb-4">
+                📋 순서 결과 ({sequenceOrder.length}개)
+              </h2>
+              <div className="space-y-2 max-h-96 overflow-y-auto">
+                {sequenceOrder.map((item, index) => (
+                  <div
+                    key={index}
+                    className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-lg flex items-center gap-4"
+                  >
+                    <div className="flex-shrink-0 w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold">
+                      {index + 1}
+                    </div>
+                    <span className="text-lg font-medium">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* History */}
-          {history.length > 0 && (
+          {!sequenceMode && history.length > 0 && (
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
               <h2 className="text-xl font-semibold mb-4">
                 추첨 기록 ({history.length}개)
