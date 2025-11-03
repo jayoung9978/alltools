@@ -7,10 +7,9 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Main content container with space for side ads */
-main {
-  @apply mx-auto;
-  max-width: 1200px; /* Content area width */
+/* Container with consistent width across all pages */
+.container {
+  max-width: 1200px !important;
 }
 
 /* On larger screens, add padding for ad space */
