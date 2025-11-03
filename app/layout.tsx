@@ -79,16 +79,15 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <JsonLd />
-      </head>
-      <body className={inter.className}>
         {/* Google AdSense */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4943284524590783"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
-
+      </head>
+      <body className={inter.className}>
         <div className="min-h-screen flex flex-col">
           <Header />
           <main className="flex-grow">{children}</main>
