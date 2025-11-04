@@ -1,0 +1,21 @@
+{
+  "name": "ASDW.KR - 무료 웹 도구 모음",
+  "short_name": "ASDW.KR",
+  "description": "대출 계산기, BMI 계산기, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사, 토너먼트 선택 등 29개 이상의 무료 웹 도구를 제공합니다.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -46,6 +46,16 @@ export const metadata: Metadata = {
 	authors: [{ name: "ASDW", url: "https://asdw.kr" }],
 	creator: "ASDW",
 	publisher: "ASDW",
+	icons: {
+		icon: [
+			{ url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+			{ url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+		],
+		apple: [
+			{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+		],
+	},
+	manifest: "/manifest.json",
 	robots: {
 		index: true,
 		follow: true,
@@ -65,12 +75,14 @@ export const metadata: Metadata = {
 		title: "ASDW.KR - 무료 웹 도구 모음",
 		description:
 			"대출 계산기, BMI 계산기, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사 등 29개 이상의 무료 웹 도구",
+		images: [{ url: "/og-image.png", width: 1200, height: 630 }],
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: "ASDW.KR - 무료 웹 도구 모음",
 		description:
 			"대출 계산기, BMI 계산기, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사 등 29개 이상의 무료 웹 도구",
+		images: ["/og-image.png"],
 	},
 	verification: {
 		// 나중에 Google Search Console에서 받은 verification code 추가
