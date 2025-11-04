@@ -102,6 +102,21 @@ export default function RootLayout({
 		<html lang="ko">
 			<head>
 				<JsonLd />
+				{/* Google tag (gtag.js) */}
+				<script
+					async
+					src="https://www.googletagmanager.com/gtag/js?id=G-2F7NR3L51L"
+				></script>
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `
+							window.dataLayer = window.dataLayer || [];
+							function gtag(){dataLayer.push(arguments);}
+							gtag('js', new Date());
+							gtag('config', 'G-2F7NR3L51L');
+						`,
+					}}
+				/>
 				{/* Google AdSense */}
 				<script
 					async
