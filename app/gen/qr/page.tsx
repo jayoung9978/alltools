@@ -4,20 +4,70 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import QRCode from "qrcode";
 
+type QRMode = "text" | "contact";
+
+interface ContactData {
+  name: string;
+  phone: string;
+  email: string;
+  company: string;
+  title: string;
+  website: string;
+  address: string;
+}
+
 export default function QRGenerator() {
+  const [mode, setMode] = useState<QRMode>("text");
   const [text, setText] = useState("");
+  const [contact, setContact] = useState<ContactData>({
+    name: "",
+    phone: "",
+    email: "",
+    company: "",
+    title: "",
+    website: "",
+    address: "",
+  });
   const [qrDataUrl, setQrDataUrl] = useState("");
   const [size, setSize] = useState(300);
   const [errorLevel, setErrorLevel] = useState<"L" | "M" | "Q" | "H">("M");
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const generateVCard = (): string => {
+    const vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      contact.name ? `FN:${contact.name}` : "",
+      contact.name ? `N:${contact.name.split(" ").reverse().join(";")};;;` : "",
+      contact.phone ? `TEL;TYPE=CELL:${contact.phone}` : "",
+      contact.email ? `EMAIL:${contact.email}` : "",
+      contact.company ? `ORG:${contact.company}` : "",
+      contact.title ? `TITLE:${contact.title}` : "",
+      contact.website ? `URL:${contact.website}` : "",
+      contact.address ? `ADR;TYPE=WORK:;;${contact.address};;;;` : "",
+      "END:VCARD",
+    ]
+      .filter((line) => line !== "")
+      .join("\n");
+
+    return vcard;
+  };
+
   const generateQR = async () => {
-    if (!text.trim()) return;
+    let qrContent = "";
+
+    if (mode === "text") {
+      if (!text.trim()) return;
+      qrContent = text;
+    } else {
+      if (!contact.name && !contact.phone && !contact.email) return;
+      qrContent = generateVCard();
+    }
 
     try {
       const canvas = canvasRef.current;
       if (canvas) {
-        await QRCode.toCanvas(canvas, text, {
+        await QRCode.toCanvas(canvas, qrContent, {
           width: size,
           errorCorrectionLevel: errorLevel,
           margin: 2,
@@ -57,6 +107,21 @@ export default function QRGenerator() {
   };
 
   const loadExample = (type: string) => {
+    if (type === "vcard") {
+      setMode("contact");
+      setContact({
+        name: "홍길동",
+        phone: "010-1234-5678",
+        email: "hong@example.com",
+        company: "ASDW",
+        title: "개발자",
+        website: "https://asdw.kr",
+        address: "서울특별시 강남구",
+      });
+      return;
+    }
+
+    setMode("text");
     switch (type) {
       case "url":
         setText("https://asdw.kr");
@@ -77,10 +142,12 @@ export default function QRGenerator() {
   };
 
   useEffect(() => {
-    if (text) {
+    if (mode === "text" && text) {
+      generateQR();
+    } else if (mode === "contact" && (contact.name || contact.phone || contact.email)) {
       generateQR();
     }
-  }, [text, size, errorLevel]);
+  }, [text, contact, size, errorLevel, mode]);
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
@@ -102,54 +169,195 @@ export default function QRGenerator() {
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
           <h2 className="text-xl font-semibold mb-4">입력</h2>
 
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                텍스트 또는 URL
-              </label>
-              <textarea
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="https://example.com"
-                className="input-field min-h-[120px]"
-              />
-              <div className="text-xs text-gray-500 mt-1">
-                {text.length} 글자
-              </div>
-            </div>
+          {/* Mode Selector */}
+          <div className="flex gap-2 mb-6">
+            <button
+              onClick={() => setMode("text")}
+              className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+                mode === "text"
+                  ? "bg-primary-500 text-white"
+                  : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+              }`}
+            >
+              📝 텍스트
+            </button>
+            <button
+              onClick={() => setMode("contact")}
+              className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+                mode === "contact"
+                  ? "bg-primary-500 text-white"
+                  : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+              }`}
+            >
+              👤 연락처
+            </button>
+          </div>
 
-            {/* Quick Examples */}
-            <div>
-              <label className="block text-sm font-medium mb-2">
-                빠른 예제
-              </label>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <button
-                  onClick={() => loadExample("url")}
-                  className="btn-secondary text-xs py-2"
-                >
-                  🔗 URL
-                </button>
-                <button
-                  onClick={() => loadExample("email")}
-                  className="btn-secondary text-xs py-2"
-                >
-                  📧 이메일
-                </button>
-                <button
-                  onClick={() => loadExample("tel")}
-                  className="btn-secondary text-xs py-2"
-                >
-                  📞 전화
-                </button>
-                <button
-                  onClick={() => loadExample("sms")}
-                  className="btn-secondary text-xs py-2"
-                >
-                  💬 SMS
-                </button>
-              </div>
-            </div>
+          <div className="space-y-4">
+            {mode === "text" ? (
+              <>
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    텍스트 또는 URL
+                  </label>
+                  <textarea
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder="https://example.com"
+                    className="input-field min-h-[120px]"
+                  />
+                  <div className="text-xs text-gray-500 mt-1">
+                    {text.length} 글자
+                  </div>
+                </div>
+
+                {/* Quick Examples - Text */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    빠른 예제
+                  </label>
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <button
+                      onClick={() => loadExample("url")}
+                      className="btn-secondary text-xs py-2"
+                    >
+                      🔗 URL
+                    </button>
+                    <button
+                      onClick={() => loadExample("email")}
+                      className="btn-secondary text-xs py-2"
+                    >
+                      📧 이메일
+                    </button>
+                    <button
+                      onClick={() => loadExample("tel")}
+                      className="btn-secondary text-xs py-2"
+                    >
+                      📞 전화
+                    </button>
+                    <button
+                      onClick={() => loadExample("sms")}
+                      className="btn-secondary text-xs py-2"
+                    >
+                      💬 SMS
+                    </button>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="col-span-2">
+                    <label className="block text-sm font-medium mb-2">
+                      이름 *
+                    </label>
+                    <input
+                      type="text"
+                      value={contact.name}
+                      onChange={(e) =>
+                        setContact({ ...contact, name: e.target.value })
+                      }
+                      placeholder="홍길동"
+                      className="input-field"
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <label className="block text-sm font-medium mb-2">
+                      전화번호 *
+                    </label>
+                    <input
+                      type="tel"
+                      value={contact.phone}
+                      onChange={(e) =>
+                        setContact({ ...contact, phone: e.target.value })
+                      }
+                      placeholder="010-1234-5678"
+                      className="input-field"
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <label className="block text-sm font-medium mb-2">
+                      이메일
+                    </label>
+                    <input
+                      type="email"
+                      value={contact.email}
+                      onChange={(e) =>
+                        setContact({ ...contact, email: e.target.value })
+                      }
+                      placeholder="email@example.com"
+                      className="input-field"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">
+                      회사
+                    </label>
+                    <input
+                      type="text"
+                      value={contact.company}
+                      onChange={(e) =>
+                        setContact({ ...contact, company: e.target.value })
+                      }
+                      placeholder="회사명"
+                      className="input-field"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">
+                      직책
+                    </label>
+                    <input
+                      type="text"
+                      value={contact.title}
+                      onChange={(e) =>
+                        setContact({ ...contact, title: e.target.value })
+                      }
+                      placeholder="직책"
+                      className="input-field"
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <label className="block text-sm font-medium mb-2">
+                      웹사이트
+                    </label>
+                    <input
+                      type="url"
+                      value={contact.website}
+                      onChange={(e) =>
+                        setContact({ ...contact, website: e.target.value })
+                      }
+                      placeholder="https://example.com"
+                      className="input-field"
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <label className="block text-sm font-medium mb-2">
+                      주소
+                    </label>
+                    <input
+                      type="text"
+                      value={contact.address}
+                      onChange={(e) =>
+                        setContact({ ...contact, address: e.target.value })
+                      }
+                      placeholder="서울특별시 강남구"
+                      className="input-field"
+                    />
+                  </div>
+                </div>
+
+                {/* Quick Example - vCard */}
+                <div>
+                  <button
+                    onClick={() => loadExample("vcard")}
+                    className="btn-secondary w-full text-sm"
+                  >
+                    📋 예제 연락처 불러오기
+                  </button>
+                </div>
+              </>
+            )}
 
             {/* Size */}
             <div>
@@ -201,7 +409,11 @@ export default function QRGenerator() {
             <button
               onClick={generateQR}
               className="btn-primary w-full"
-              disabled={!text.trim()}
+              disabled={
+                mode === "text"
+                  ? !text.trim()
+                  : !contact.name && !contact.phone && !contact.email
+              }
             >
               QR 코드 생성
             </button>
@@ -244,7 +456,11 @@ export default function QRGenerator() {
                   <div className="text-xs space-y-1">
                     <div>크기: {size} × {size}px</div>
                     <div>오류 복원: {errorLevel} 수준</div>
-                    <div>내용 길이: {text.length} 글자</div>
+                    {mode === "text" ? (
+                      <div>내용 길이: {text.length} 글자</div>
+                    ) : (
+                      <div>타입: vCard 연락처</div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -264,7 +480,7 @@ export default function QRGenerator() {
       {/* Info */}
       <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-6 mt-6">
         <h2 className="text-xl font-semibold mb-4">💡 QR 코드 활용</h2>
-        <div className="grid md:grid-cols-2 gap-4 text-sm">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
           <div>
             <h3 className="font-semibold mb-2">URL</h3>
             <code className="text-xs bg-white dark:bg-gray-700 p-2 rounded block">
@@ -287,6 +503,12 @@ export default function QRGenerator() {
             <h3 className="font-semibold mb-2">WiFi</h3>
             <code className="text-xs bg-white dark:bg-gray-700 p-2 rounded block">
               WIFI:T:WPA;S:이름;P:비번;;
+            </code>
+          </div>
+          <div className="md:col-span-2">
+            <h3 className="font-semibold mb-2">연락처 (vCard)</h3>
+            <code className="text-xs bg-white dark:bg-gray-700 p-2 rounded block whitespace-pre-wrap">
+              스마트폰에서 스캔 시 연락처 앱에 바로 저장됩니다
             </code>
           </div>
         </div>
