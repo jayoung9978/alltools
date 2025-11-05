@@ -178,6 +178,13 @@ export const toolCategories: ToolCategory[] = [
         href: "/gen/tournament",
         popular: true,
       },
+      {
+        id: "uuid",
+        name: "UUID 생성기",
+        description: "고유 식별자 생성 (v4)",
+        href: "/gen/uuid",
+        popular: true,
+      },
     ],
   },
   {

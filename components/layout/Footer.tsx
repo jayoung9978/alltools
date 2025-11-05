@@ -87,6 +87,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/gen/uuid" className="hover:text-primary-500">
+                  UUID 생성
+                </Link>
+              </li>
+              <li>
                 <Link href="/text/duplicate" className="hover:text-primary-500">
                   중복 제거
                 </Link>
