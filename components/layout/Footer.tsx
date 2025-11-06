@@ -104,25 +104,25 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* 정보 */}
+          {/* 개발자 도구 */}
           <div>
             <h3 className="font-semibold mb-3 text-gray-900 dark:text-white">
-              정보
+              개발자 도구
             </h3>
             <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
               <li>
-                <Link href="/about" className="hover:text-primary-500">
-                  소개
+                <Link href="/text/count" className="hover:text-primary-500">
+                  글자수 세기
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-primary-500">
-                  개인정보처리방침
+                <Link href="/gen/password" className="hover:text-primary-500">
+                  비밀번호 생성
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-primary-500">
-                  문의하기
+                <Link href="/conv/base64" className="hover:text-primary-500">
+                  Base64 변환
                 </Link>
               </li>
             </ul>
