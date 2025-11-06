@@ -141,7 +141,7 @@ export const toolCategories: ToolCategory[] = [
       {
         id: "qr",
         name: "QR 코드 생성기",
-        description: "URL, 텍스트를 QR코드로 변환",
+        description: "URL, 텍스트, 연락처를 QR코드로 변환",
         href: "/gen/qr",
         popular: true,
       },

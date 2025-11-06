@@ -35,37 +35,37 @@ export default function SearchableTools() {
       {/* Tool Categories */}
       {hasResults ? (
         <>
-          <div className="grid gap-8">
+          <div className="grid gap-6">
             {filteredCategories.map((category) => (
-              <div key={category.id} className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl">{category.icon}</span>
+              <div key={category.id} className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl">{category.icon}</span>
                   <div>
-                    <h2 className="text-2xl font-bold">{category.name}</h2>
-                    <p className="text-gray-600 dark:text-gray-400">
+                    <h2 className="text-xl font-bold">{category.name}</h2>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
                       {category.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {category.tools.map((tool) => (
                     <Link
                       key={tool.id}
                       href={tool.href}
                       className="tool-card"
                     >
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h3 className="text-lg font-semibold mb-2">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <h3 className="text-base font-semibold mb-1">
                             {tool.name}
                           </h3>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                          <p className="text-xs text-gray-600 dark:text-gray-400">
                             {tool.description}
                           </p>
                         </div>
                         {tool.popular && (
-                          <span className="text-xs bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 px-2 py-1 rounded">
+                          <span className="text-xs bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 px-2 py-0.5 rounded flex-shrink-0">
                             인기
                           </span>
                         )}
