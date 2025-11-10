@@ -48,6 +48,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/conv/number-base" className="hover:text-primary-500">
+                  진법 변환
+                </Link>
+              </li>
+              <li>
                 <Link href="/conv/color" className="hover:text-primary-500">
                   색상 변환
                 </Link>

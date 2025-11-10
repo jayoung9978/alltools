@@ -129,6 +129,13 @@ export const toolCategories: ToolCategory[] = [
         href: "/conv/data-size",
         popular: true,
       },
+      {
+        id: "number-base",
+        name: "진법 변환",
+        description: "2진법, 8진법, 10진법, 16진법 변환",
+        href: "/conv/number-base",
+        popular: true,
+      },
     ],
   },
   {
