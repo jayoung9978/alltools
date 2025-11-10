@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 		template: "%s | ASDW.KR",
 	},
 	description:
-		"대출 계산기, BMI 계산기, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사, 토너먼트 선택, QR코드 명함, UUID 생성 등 30개 이상의 무료 웹 도구를 제공합니다.",
+		"대출 계산기, BMI 계산기, 진법 변환기, 데이터 크기 변환, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사, 토너먼트 선택, QR코드 명함, UUID 생성 등 30개 이상의 무료 웹 도구를 제공합니다.",
 	keywords: [
 		"무료 도구",
 		"웹 도구",
@@ -33,10 +33,20 @@ export const metadata: Metadata = {
 		"단위 변환기",
 		"데이터 크기 변환",
 		"용량 변환",
+		"진법 변환",
+		"진법 변환기",
+		"2진법",
+		"8진법",
+		"10진법",
+		"16진법",
+		"binary",
+		"hexadecimal",
+		"진수 변환",
 		"CSV JSON 변환",
 		"데이터 변환",
 		"이미지 변환",
 		"이미지 포맷 변환",
+		"색상 변환",
 		"QR코드 생성",
 		"QR코드 만들기",
 		"명함 QR코드",
@@ -111,14 +121,14 @@ export const metadata: Metadata = {
 		siteName: "ASDW.KR",
 		title: "ASDW.KR - 무료 웹 도구 모음",
 		description:
-			"대출 계산기, BMI 계산기, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사, QR코드 명함, UUID 생성 등 30개 이상의 무료 웹 도구",
+			"대출 계산기, BMI 계산기, 진법 변환기, 데이터 크기 변환, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사, QR코드 명함, UUID 생성 등 30개 이상의 무료 웹 도구",
 		images: [{ url: "/og-image.png", width: 1200, height: 630 }],
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: "ASDW.KR - 무료 웹 도구 모음",
 		description:
-			"대출 계산기, BMI 계산기, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사, QR코드 명함, UUID 생성 등 30개 이상의 무료 웹 도구",
+			"대출 계산기, BMI 계산기, 진법 변환기, 데이터 크기 변환, CSV-JSON 변환, 이미지 변환, Favicon 생성기, 색상 대비 검사, QR코드 명함, UUID 생성 등 30개 이상의 무료 웹 도구",
 		images: ["/og-image.png"],
 	},
 	verification: {
