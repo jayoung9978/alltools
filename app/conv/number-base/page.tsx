@@ -312,38 +312,35 @@ export default function NumberBaseConverter() {
       {/* Results Section */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mb-6">
         <h2 className="text-xl font-semibold mb-4">변환 결과</h2>
-        <div className="space-y-3">
+        <div className="grid md:grid-cols-2 gap-2">
           {BASES.map(({ key, name, description, useCase }) => {
             const isInput = key === inputBase;
             return (
               <div
                 key={key}
-                className={`p-4 rounded-lg border-2 transition-colors ${
+                className={`p-3 rounded-lg border transition-colors ${
                   isInput
                     ? "border-primary-500 bg-primary-50 dark:bg-primary-900/20"
                     : "border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50"
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span className="font-semibold">{name}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">
-                        {description}
-                      </span>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                      <span className="font-semibold text-sm">{name}</span>
                       {useCase && (
-                        <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded">
+                        <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-1.5 py-0.5 rounded">
                           {useCase}
                         </span>
                       )}
                     </div>
-                    <div className="text-2xl font-mono font-semibold break-all">
+                    <div className="text-lg font-mono font-semibold break-all">
                       {results[key] || "0"}
                     </div>
                   </div>
                   <button
                     onClick={() => copyToClipboard(results[key] || "0")}
-                    className="text-primary-500 hover:text-primary-600 ml-4 text-2xl"
+                    className="text-primary-500 hover:text-primary-600 text-xl flex-shrink-0"
                     title="복사"
                   >
                     📋
