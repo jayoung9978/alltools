@@ -250,58 +250,58 @@ export default function NumberBaseConverter() {
         {/* Quick Examples */}
         <div className="mt-6">
           <h3 className="text-sm font-medium mb-2">빠른 예시</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
             <button
               onClick={() => loadExample("1010", "binary")}
-              className="btn-secondary text-sm py-2"
+              className="btn-secondary text-xs py-1.5 px-2"
             >
               1010 (2진법)
             </button>
             <button
               onClick={() => loadExample("102", "ternary")}
-              className="btn-secondary text-sm py-2"
+              className="btn-secondary text-xs py-1.5 px-2"
             >
               102 (3진법)
             </button>
             <button
               onClick={() => loadExample("255", "decimal")}
-              className="btn-secondary text-sm py-2"
+              className="btn-secondary text-xs py-1.5 px-2"
             >
               255 (10진법)
             </button>
             <button
               onClick={() => loadExample("FF", "hexadecimal")}
-              className="btn-secondary text-sm py-2"
+              className="btn-secondary text-xs py-1.5 px-2"
             >
               FF (16진법)
             </button>
             <button
               onClick={() => loadExample("A0", "duodecimal")}
-              className="btn-secondary text-sm py-2"
+              className="btn-secondary text-xs py-1.5 px-2"
             >
               A0 (12진법)
             </button>
             <button
               onClick={() => loadExample("J9", "vigesimal")}
-              className="btn-secondary text-sm py-2"
+              className="btn-secondary text-xs py-1.5 px-2"
             >
               J9 (20진법)
             </button>
             <button
               onClick={() => loadExample("JBSWY3DP", "base32")}
-              className="btn-secondary text-sm py-2"
+              className="btn-secondary text-xs py-1.5 px-2"
             >
               JBSWY3DP (32진법)
             </button>
             <button
               onClick={() => loadExample("ABC123", "base36")}
-              className="btn-secondary text-sm py-2"
+              className="btn-secondary text-xs py-1.5 px-2"
             >
               ABC123 (36진법)
             </button>
             <button
               onClick={() => loadExample("777", "octal")}
-              className="btn-secondary text-sm py-2"
+              className="btn-secondary text-xs py-1.5 px-2"
             >
               777 (8진법)
             </button>
