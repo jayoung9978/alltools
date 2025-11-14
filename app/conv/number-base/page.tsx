@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-type Base = "binary" | "ternary" | "octal" | "decimal" | "duodecimal" | "hexadecimal" | "base32" | "base36";
+type Base = "binary" | "ternary" | "octal" | "decimal" | "duodecimal" | "hexadecimal" | "vigesimal" | "base32" | "base36";
 
 interface BaseInfo {
   key: Base;
@@ -71,6 +71,15 @@ const BASES: BaseInfo[] = [
     useCase: "색상 코드, 메모리 주소",
   },
   {
+    key: "vigesimal",
+    name: "20진법 (Vigesimal)",
+    base: 20,
+    description: "0-9, A-J로 표현",
+    placeholder: "예: A",
+    pattern: /^[0-9A-Ja-j]+$/,
+    useCase: "마야 문명, 켈트 문화",
+  },
+  {
     key: "base32",
     name: "32진법 (Base32)",
     base: 32,
@@ -100,6 +109,7 @@ export default function NumberBaseConverter() {
     decimal: "10",
     duodecimal: "A",
     hexadecimal: "A",
+    vigesimal: "A",
     base32: "A",
     base36: "A",
   });
@@ -115,6 +125,7 @@ export default function NumberBaseConverter() {
         decimal: "",
         duodecimal: "",
         hexadecimal: "",
+        vigesimal: "",
         base32: "",
         base36: "",
       });
@@ -148,6 +159,7 @@ export default function NumberBaseConverter() {
         decimal: decimalValue.toString(10),
         duodecimal: decimalValue.toString(12).toUpperCase(),
         hexadecimal: decimalValue.toString(16).toUpperCase(),
+        vigesimal: decimalValue.toString(20).toUpperCase(),
         base32: decimalValue.toString(32).toUpperCase(),
         base36: decimalValue.toString(36).toUpperCase(),
       };
@@ -195,7 +207,7 @@ export default function NumberBaseConverter() {
 
       <h1 className="text-4xl font-bold mb-2">진법 변환기</h1>
       <p className="text-gray-600 dark:text-gray-400 mb-8">
-        2진법, 3진법, 8진법, 10진법, 12진법, 16진법, 32진법, 36진법을 상호 변환합니다
+        2진법, 3진법, 8진법, 10진법, 12진법, 16진법, 20진법, 32진법, 36진법을 상호 변환합니다
       </p>
 
       {/* Input Section */}
@@ -268,6 +280,12 @@ export default function NumberBaseConverter() {
               className="btn-secondary text-sm py-2"
             >
               A0 (12진법)
+            </button>
+            <button
+              onClick={() => loadExample("J9", "vigesimal")}
+              className="btn-secondary text-sm py-2"
+            >
+              J9 (20진법)
             </button>
             <button
               onClick={() => loadExample("JBSWY3DP", "base32")}
@@ -350,6 +368,7 @@ export default function NumberBaseConverter() {
               <li>• <strong>10진법</strong>: 일상생활에서 사용</li>
               <li>• <strong>12진법</strong>: 시간, 각도 (1다스 = 12)</li>
               <li>• <strong>16진법</strong>: 색상 코드, 메모리 주소</li>
+              <li>• <strong>20진법</strong>: 마야 문명, 켈트 문화</li>
               <li>• <strong>32진법</strong>: 데이터 인코딩, 읽기 쉬움</li>
               <li>• <strong>36진법</strong>: URL 단축, 최대 알파벳 활용</li>
             </ul>
@@ -362,8 +381,9 @@ export default function NumberBaseConverter() {
               <li>• 10진수 10 = 8진수 12</li>
               <li>• 10진수 10 = 12진수 A</li>
               <li>• 10진수 10 = 16진수 A</li>
+              <li>• 10진수 10 = 20진수 A</li>
               <li>• 10진수 255 = 16진수 FF</li>
-              <li>• 10진수 1000 = 36진수 RS</li>
+              <li>• 10진수 399 = 20진수 J9</li>
             </ul>
           </div>
           <div>
@@ -373,6 +393,7 @@ export default function NumberBaseConverter() {
               <li>• <strong>8진법</strong>: chmod 755 (파일 권한)</li>
               <li>• <strong>12진법</strong>: 1시간 = 60분 = 12×5</li>
               <li>• <strong>16진법</strong>: #FF5733 (CSS 색상)</li>
+              <li>• <strong>20진법</strong>: 프랑스어 숫자 체계</li>
               <li>• <strong>32진법</strong>: Google Authenticator</li>
               <li>• <strong>36진법</strong>: YouTube 동영상 ID</li>
             </ul>
@@ -384,6 +405,7 @@ export default function NumberBaseConverter() {
               <li>• <strong>3진법</strong>: 정보 효율성 높음</li>
               <li>• <strong>12진법</strong>: 약수 많음 (2,3,4,6)</li>
               <li>• <strong>16진법</strong>: 2진법과 변환 쉬움</li>
+              <li>• <strong>20진법</strong>: 약수 많음 (2,4,5,10)</li>
               <li>• <strong>32/36진법</strong>: 짧고 읽기 쉬움</li>
             </ul>
           </div>
@@ -398,7 +420,7 @@ export default function NumberBaseConverter() {
             <li>• <strong>8진수</strong>: 0o12 또는 012 (0o 또는 0 접두사)</li>
             <li>• <strong>10진수</strong>: 10 (접두사 없음)</li>
             <li>• <strong>16진수</strong>: 0xA 또는 0xA (0x 접두사)</li>
-            <li>• <strong>12, 32, 36진법</strong>: 일반적으로 문자열로 처리</li>
+            <li>• <strong>12, 20, 32, 36진법</strong>: 일반적으로 문자열로 처리</li>
           </ul>
         </div>
       </div>

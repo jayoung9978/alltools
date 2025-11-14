@@ -132,7 +132,7 @@ export const toolCategories: ToolCategory[] = [
       {
         id: "number-base",
         name: "진법 변환",
-        description: "2진법, 3진법, 8진법, 10진법, 12진법, 16진법, 32진법, 36진법 변환",
+        description: "2진법, 3진법, 8진법, 10진법, 12진법, 16진법, 20진법, 32진법, 36진법 변환",
         href: "/conv/number-base",
         popular: true,
       },
